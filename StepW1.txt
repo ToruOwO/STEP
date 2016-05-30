@@ -2,13 +2,21 @@ STEP-W1
 
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <vector>
+#define MAXN 70000
 using namespace std;
 
-char c[16];
+string c;
 
 //0. sort the given alphabets
+
+sort(c.begin(), c.end());
+
 //1. read in the words from dictionary
-//2. sort the words
-//3. search for the word that has the longest subsequence common to given alphabets
-//(if length of word > 16, continue)
-//improve performance by Dynamic Programming?
+
+string words[MAXN];
+
+//2. sort each word in alphabetical order (or use hash table?)
+//3. compare the words and given alphabets alphabet by alphabet until alphabet differs or the word ends (if length of word > 16, skip)
+//4. if the word ends (meaning that its alphabets match given alphabets), compare its length with maximum length; if length > max, max = length
