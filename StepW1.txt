@@ -1,0 +1,14 @@
+STEP-W1
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+char c[16];
+
+//0. sort the given alphabets
+//1. read in the words from dictionary
+//2. sort the words
+//3. search for the word that has the longest subsequence common to given alphabets
+//(if length of word > 16, continue)
+//improve performance by Dynamic Programming?
