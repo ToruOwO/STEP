@@ -3,8 +3,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <utility>
+#include <vector>
 #define MAXN 100000
 using namespace std;
 
@@ -12,8 +12,12 @@ using namespace std;
 int main(){
     string c; //the given 16 characters(lowercase alphabets)
     cin >> c;
-    
-    sort(c.begin(), c.end());
+
+    if(c.length() != 16) cout << "Please enter excatly 16 characters." << endl;
+
+    else{
+
+        sort(c.begin(), c.end());
     
     pair<string, string> word[MAXN]; //read in the words from dictionary &sort
     string ws, w;
@@ -28,7 +32,7 @@ int main(){
     
     int max = 0; //max. length
     
-    string longest = "0";
+    vector<string> longest;
     
     for(int i = 0; i < MAXN; i++){ // compare word[i] with string c
         
@@ -42,19 +46,31 @@ int main(){
             if(a == 16) {match = false; break;}
         }
         if(match) {
+
+            if(word[i].first.length() == max) {
+                longest.push_back(word[i].second);
+            }
+
             if(word[i].first.length() > max) {
                 max = word[i].first.length();
-                longest = word[i].second;
+                longest.clear();
+                longest.push_back(word[i].second);
             }
             
         }
         
     }
     
-    if (longest == "0") {
+    if (longest.empty()) {
         cout << "impossible" << endl;
     }
-    else cout << longest << endl;
+    else {
+        sort(longest.begin(), longest.end());
+        for(int i = 0; i < longest.size(); i++) cout << longest[i] << endl;
+    }
+
+
+    }
     
     return 0;
         
