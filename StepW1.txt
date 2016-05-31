@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <utility>
 #define MAXN 100000
 using namespace std;
 
@@ -19,14 +20,16 @@ int main(){
     //1. read in the words from dictionary; create 2 copies, one for sorted words and the other for originals
     //2. sort each word in alphabetical order (or use hash table?)
     
-    unordered_map<string, string> word[MAXN];
+    pair<string, string> word[MAXN];
     string ws, w;
     
     for(int i = 0; i < MAXN; i++){
         cin >> w;
         ws = w;
         sort(ws.begin(),ws.end());
-        word[i].insert(ws,w); //word[MAXN].first is now a collection of sorted words; word[MAXN].second of originals
+        word[i].first = ws;
+        word[i].second = w;
+        //word[MAXN].first is now a collection of sorted words; word[MAXN].second of originals
     }
     
     //3. compare the words and given alphabets alphabet by alphabet until alphabet differs or the word ends (if length of word > 16, skip)
