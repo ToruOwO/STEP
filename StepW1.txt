@@ -3,20 +3,61 @@ STEP-W1
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <vector>
-#define MAXN 70000
+#include <unordererd_map>
+#define MAXN 100000
 using namespace std;
 
-string c;
 
-//0. sort the given alphabets
+int main(){
+	string c; //the given 16 characters(lowercase alphabets)
+	cin >> c;
 
-sort(c.begin(), c.end());
+	//0. sort the given alphabets
 
-//1. read in the words from dictionary
+	sort(c.begin(), c.end());
 
-string words[MAXN];
+	//1. read in the words from dictionary; create 2 copies, one for sorted words and the other for originals
+	//2. sort each word in alphabetical order (or use hash table?)
 
-//2. sort each word in alphabetical order (or use hash table?)
-//3. compare the words and given alphabets alphabet by alphabet until alphabet differs or the word ends (if length of word > 16, skip)
-//4. if the word ends (meaning that its alphabets match given alphabets), compare its length with maximum length; if length > max, max = length
+	unordererd_map<string, string> word[MAXN];
+	string ws, w;
+
+	for(int i = 0; i < MAXN; i++){
+		cin >> w;
+		ws = w;
+		sort(ws.begin(),ws.end());
+		word[i].insert(ws,w); //word[MAXN].first is now a collection of sorted words; word[MAXN].second of originals
+	}
+
+	//3. compare the words and given alphabets alphabet by alphabet until alphabet differs or the word ends (if length of word > 16, skip)
+	//4. if the word ends (meaning that its alphabets match given alphabets), 
+	//compare its length with maximum length; if length > max, max = length
+
+	int max = 0; //max. length
+
+	string longest;
+
+	for(int i = 0; i < MAXN; i++){ // compare word[i] with string c
+
+		if(word[i].first.length() > 16) continue;
+
+		int a = 0, b = 0; //position of current alphabets being compared
+		bool match = true;
+		while(b < word[i].first.length()){
+			if(c[a] == word[i].first[b]) {a++;b++;continue;}
+			else a++;
+			if(a == 16) {match = false; break;}
+		}
+		if(match) {
+			if(word[i].first.length() > max) {
+				max = word[i].first.length();
+				longest = word[i].second;
+		}
+
+	}
+
+	cout << longest << endl;
+	
+	return 0;
+
+}
