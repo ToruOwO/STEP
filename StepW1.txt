@@ -13,14 +13,9 @@ int main(){
     string c; //the given 16 characters(lowercase alphabets)
     cin >> c;
     
-    //0. sort the given alphabets
-    
     sort(c.begin(), c.end());
     
-    //1. read in the words from dictionary; create 2 copies, one for sorted words and the other for originals
-    //2. sort each word in alphabetical order (or use hash table?)
-    
-    pair<string, string> word[MAXN];
+    pair<string, string> word[MAXN]; //read in the words from dictionary &sort
     string ws, w;
     
     for(int i = 0; i < MAXN; i++){
@@ -28,17 +23,12 @@ int main(){
         ws = w;
         sort(ws.begin(),ws.end());
         word[i].first = ws;
-        word[i].second = w;
-        //word[MAXN].first is now a collection of sorted words; word[MAXN].second of originals
+        word[i].second = w; //word[MAXN].first = sorted words; word[MAXN].second = originals
     }
-    
-    //3. compare the words and given alphabets alphabet by alphabet until alphabet differs or the word ends (if length of word > 16, skip)
-    //4. if the word ends (meaning that its alphabets match given alphabets),
-    //compare its length with maximum length; if length > max, max = length
     
     int max = 0; //max. length
     
-    string longest;
+    string longest = "0";
     
     for(int i = 0; i < MAXN; i++){ // compare word[i] with string c
         
@@ -59,9 +49,13 @@ int main(){
             
         }
         
-        cout << longest << endl;
     }
     
-        return 0;
+    if (longest == "0") {
+        cout << "impossible" << endl;
+    }
+    else cout << longest << endl;
+    
+    return 0;
         
 }
